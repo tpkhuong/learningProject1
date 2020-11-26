@@ -1,0 +1,40 @@
+/*** Custom varibles ***/
+:root {
+  --clr-primary: #ee6352;
+  --clr-body: #333;
+  --clr-bg: #ddd;
+}
+
+/*** Reset ***/
+
+html {
+  font-size: 62.3%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.5;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background: var(--clr-body);
+  font-size: 2rem;
+}
+
+ul[class],
+li[class] {
+  list-style: none;
+  padding: 0;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+a[href] {
+  text-decoration: none;
+}
