@@ -29,22 +29,48 @@ for (let i = withoutUnderscore.length - 1; 0 <= i; i--) {
   reverseOurStr.push(eachChar);
 }
 
-const collaborator = {
-  name: "Toan Khuong",
-  interests: "Anything that involves JavaScript",
-  profession: {
-    workingTowards: "Software Engineer/Senior Developer",
-    status: "Pending",
-  },
-  goals: {
-    current: "Get better every day. Always Be Coding",
-    willAchieve: {
-      year: "2021",
-      position: "Junior Developer",
-      company: "A great comapny that focus on helping others",
-    },
-  },
-  favoriteQuotes: {
-    denzelWashington: "Keep moving, keep growing, KEEP LEARNING!",
-  },
-};
+function palindromeChecker(strInput) {
+  var regex = /\w/gi;
+  var lettersAndNums = strInput.match(regex);
+  var withoutUnderscore = lettersAndNums.filter(function removeUnderscore(
+    eachChar
+  ) {
+    return eachChar != "_";
+  });
+  var reversedStr = [];
+
+  for (let i = withoutUnderscore.length - 1; 0 <= i; i--) {
+    var eachValue = withoutUnderscore[i];
+    reverseOurStr.push(eachValue);
+  }
+  console.log(withoutUnderscore);
+}
+// const collaborator = {
+//   name: "Toan Khuong",
+//   interests: "Anything that involves JavaScript",
+//   // profession: {
+//   //   workingTowards: "Software Engineer/Senior Developer",
+//   //   status: "Pending",
+//   // },
+//   goals: {
+//     current: "Get better every day. Always Be Coding",
+//     // willAchieve: {
+//     //   year: "2021",
+//     //   position: "Junior Developer",
+//     //   company: "A great comapny that focus on helping others",
+//     // },
+//   },
+//   favoriteQuotes: {
+//     denzelWashington: "Keep moving, keep growing, KEEP LEARNING!",
+//   },
+// };
+
+// const collaborator = {
+//   name: "Toan Khuong",
+//   goals: {
+//     current: "Get better every day. Always Be Coding"
+//   },
+//   favoriteQuotes: {
+//     denzelWashington: "Keep moving, keep growing, KEEP LEARNING!"
+//   },
+// };
