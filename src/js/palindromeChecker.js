@@ -28,3 +28,23 @@ for (let i = withoutUnderscore.length - 1; 0 <= i; i--) {
   var eachChar = withoutUnderscore[i];
   reverseOurStr.push(eachChar);
 }
+
+const collaborator = {
+  name: "Toan Khuong",
+  interests: "Anything that involves JavaScript",
+  profession: {
+    workingTowards: "Software Engineer/Senior Developer",
+    status: "Pending",
+  },
+  goals: {
+    current: "Get better every day. Always Be Coding",
+    willAchieve: {
+      year: "2021",
+      position: "Junior Developer",
+      company: "A great comapny that focus on helping others",
+    },
+  },
+  favoriteQuotes: {
+    denzelWashington: "Keep moving, keep growing, KEEP LEARNING!",
+  },
+};
