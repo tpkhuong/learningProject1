@@ -26,24 +26,42 @@ var reverseOurStr = [];
 //if we used 0 < i when i is 0 i is no longer greater than 0 it equals to 0. we won't enter our loop.
 for (let i = withoutUnderscore.length - 1; 0 <= i; i--) {
   var eachChar = withoutUnderscore[i];
-  reverseOurStr.push(eachChar);
+  reversedStr.push(eachChar);
 }
 
 function palindromeChecker(strInput) {
+  var lowerCased = strInput.toLowerCase();
   var regex = /\w/gi;
-  var lettersAndNums = strInput.match(regex);
+  var lettersAndNums = lowerCased.match(regex);
   var withoutUnderscore = lettersAndNums.filter(function removeUnderscore(
     eachChar
   ) {
     return eachChar != "_";
   });
+  //
   var reversedStr = [];
-
+  console.log(withoutUnderscore);
+  /* ["m", "y", "a", "g", "e", "i", "s", "0", "0", "s", "i", "e", "g", "a", "y", "m"] */
   for (let i = withoutUnderscore.length - 1; 0 <= i; i--) {
     var eachValue = withoutUnderscore[i];
-    reverseOurStr.push(eachValue);
+    reversedStr.push(eachValue);
   }
-  console.log(withoutUnderscore);
+  /* ["m", "y", "a", "g", "e", "i", "s", "0", "0", "s", "i", "e", "g", "a", "y", "m"] */
+  console.log(reversedStr);
+  /*use map? our reversed string and original string will have the same length*/
+  /*feels dirty but we might have to have a nested loop*/
+  //if our array do not have the same length return false
+  var ourAnswer;
+  if (withoutUnderscore.length != reversedStr.length) {
+    return false;
+  } else {
+    reversedStr.forEach(function matchEachChar(eachChar) {
+      ourAnswer = withoutUnderscore.every(function checkingEachChar(innerChar) {
+        return innerChar == eachChar;
+      });
+    });
+  }
+  console.log(ourAnswer);
 }
 // const collaborator = {
 //   name: "Toan Khuong",
