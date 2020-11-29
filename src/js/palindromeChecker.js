@@ -40,28 +40,28 @@ function palindromeChecker(strInput) {
   });
   //
   var reversedStr = [];
-  console.log(withoutUnderscore);
+  // console.log(withoutUnderscore);
   /* ["m", "y", "a", "g", "e", "i", "s", "0", "0", "s", "i", "e", "g", "a", "y", "m"] */
   for (let i = withoutUnderscore.length - 1; 0 <= i; i--) {
     var eachValue = withoutUnderscore[i];
     reversedStr.push(eachValue);
   }
   /* ["m", "y", "a", "g", "e", "i", "s", "0", "0", "s", "i", "e", "g", "a", "y", "m"] */
-  console.log(reversedStr);
+  // console.log(reversedStr);
   /*use map? our reversed string and original string will have the same length*/
   /*feels dirty but we might have to have a nested loop*/
   //if our array do not have the same length return false
-  var ourAnswer;
+
   if (withoutUnderscore.length != reversedStr.length) {
     return false;
   } else {
-    reversedStr.forEach(function matchEachChar(eachChar) {
-      ourAnswer = withoutUnderscore.every(function checkingEachChar(innerChar) {
-        return innerChar == eachChar;
-      });
+    let ourAnswer = withoutUnderscore.every(function matchEachChar(eachChar) {
+      var removeFromStart = reversedStr.shift();
+      return eachChar == removeFromStart;
     });
+    return ourAnswer;
+    // console.log(ourAnswer);
   }
-  console.log(ourAnswer);
 }
 // const collaborator = {
 //   name: "Toan Khuong",
