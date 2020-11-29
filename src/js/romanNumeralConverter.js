@@ -1,5 +1,5 @@
 function convertToRoman(num) {
-  //our answer will be in string format
+  //our answer will be string type
 
   return num;
 }
