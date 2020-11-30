@@ -123,7 +123,12 @@ function makeItDynamic() {
       //   console.log(firstElementInList);
       //   console.log(lastElementInList);
       divElement.classList.toggle("active");
+      /*when we had the code firstElementInList which is the <a> the first child element of the <li> element before we add the active class to our div element
+      our code did not focus on the first <a>. it worked once we moved the code below the divElement.classList.toggle("active") line.
+      */
+      firstElementInList.focus();
       listOfListElements.forEach(function loopThroughAnchorElement(currValue) {
+        /*we are looping through the array of li but we are listening for a keydown event on the li firstElementChild which is the <a> tag*/
         currValue.firstElementChild.addEventListener(
           "keydown",
           function checkForFocus(innerEvent) {
@@ -141,6 +146,9 @@ function makeItDynamic() {
                 }
               }
             }
+            // if (innerEvent.code == "Enter" || innerEvent.code == "Space") {
+            //   console.dir(currValue.firstElementChild);
+            // }
             //if we hit escape we want to remove the active class on the currentEnteredSubmenu that we saved to an identifier when we hit enter
             if (innerEvent.key == "Escape" || innerEvent.code == "Escape") {
               //currentEnteredSubmenu is the anchor tag <a> one of the nav menu. its sibling is the div with the active class we want to check for and remove
