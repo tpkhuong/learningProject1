@@ -113,6 +113,7 @@ function makeItDynamic() {
       let divElement = anchorEle.nextElementSibling; //div element sibling of <a> element
       let ulElement = divElement.firstElementChild; //ul of li is a child of div
       //list of li that we turned into an array. then we can access that value use firstElementChild to get the anchor tag of first and last element.
+      console.dir(ulElement);
       let listOfListElements = Array.from(ulElement.children);
       let firstElementInList = listOfListElements[0].firstElementChild;
       let lastElementInList =
@@ -195,14 +196,14 @@ toggleHamburgerBtn();
 
 /*** new keyword on function that returns a value ***/
 
-function objReturnValue() {
-  this.name = "Hello";
-  this.words = "world";
+// function objReturnValue() {
+//   this.name = "Hello";
+//   this.words = "world";
 
-  return `${this.name} ${this.words}`;
-}
+//   return `${this.name} ${this.words}`;
+// }
 
-var ourSaying = new objReturnValue(); //calling objReturnValue() with new will not return the string Hello world. we have to call objReturnValue() to get the string "Hello world".
+// var ourSaying = new objReturnValue(); //calling objReturnValue() with new will not return the string Hello world. we have to call objReturnValue() to get the string "Hello world".
 
 /*** intersection Observer ***/
 
