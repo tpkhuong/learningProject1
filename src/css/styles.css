@@ -94,7 +94,7 @@ a[href] {
   border: 0.2em solid blue;
   /*** when we use position: absolute we want it to be contained inside its parent element. we want to add position: relative to the parent element ***/
   position: absolute;
-  transform: translateY(-3.2em);
+  transform: translateY(-3.5em);
   transition: transform 0.5s ease-in;
 }
 
