@@ -113,7 +113,7 @@ function makeItDynamic() {
       let divElement = anchorEle.nextElementSibling; //div element sibling of <a> element
       let ulElement = divElement.firstElementChild; //ul of li is a child of div
       //list of li that we turned into an array. then we can access that value use firstElementChild to get the anchor tag of first and last element.
-      console.dir(ulElement);
+
       let listOfListElements = Array.from(ulElement.children);
       let firstElementInList = listOfListElements[0].firstElementChild;
       let lastElementInList =
