@@ -6,12 +6,16 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+/*** path.join(__dirname, "directory"). the directory path has to be from this file
+ * path.join will work with the path that we pass into the src attribute of link and script elements. we don't have to include views or public in our path value in ejs file
+ * ***/
+app.set("views", path.join(__dirname, "../views"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", function rootPage(req, res) {
-  res.send("Hello");
+  res.render("gettingBetter");
 });
 
 app.listen(PORT, function ourServer() {
-  console.log(`App listen on port 3000`);
+  console.log(`App listen on port ${PORT}`);
 });
