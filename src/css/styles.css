@@ -60,7 +60,9 @@ p,
 body,
 figure,
 figcaption,
-blockquote {
+blockquote,
+dl,
+dd {
   margin: 0;
 }
 
