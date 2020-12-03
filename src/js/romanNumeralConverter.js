@@ -74,37 +74,60 @@ function calculateNumsBeforeConvert(valueInput, lengthInput) {
     2: "00",
     3: "000",
   };
-  console.log(
-    objOfZeros[numsOfZerosToAddToEnd],
-    typeof objOfZeros[numsOfZerosToAddToEnd]
-  );
+  var addTheseManyZeros = objOfZeros[numsOfZerosToAddToEnd];
+  // console.log(
+  //   objOfZeros[numsOfZerosToAddToEnd],
+  //   typeof objOfZeros[numsOfZerosToAddToEnd]
+  // );
   var checkNumAndLoopThisNum = Number(valueInput[0]);
   var arrOfNumsBeforeAddZeros = [];
   /*** using triple equal just incase we can a string of 0, empty string "" or empty array [] ***/
   if (checkNumAndLoopThisNum == 5) {
     //.push() will return the length SO WE WERE PUSHING/RETURNING THE LENGTH TO OUR MAP METHOD. THAT IS WHY OUR ARRAY LOOKED LIKED THIS: [["1"],1,["5","1","1","1"],1]
-    arrOfNumsBeforeAddZeros.push("5");
-    return arrOfNumsBeforeAddZeros;
+    if (numsOfZerosToAddToEnd > 0) {
+      arrOfNumsBeforeAddZeros.push("5".concat(addTheseManyZeros));
+      return arrOfNumsBeforeAddZeros;
+    } else {
+      arrOfNumsBeforeAddZeros.push("5");
+      return arrOfNumsBeforeAddZeros;
+    }
   }
   if (checkNumAndLoopThisNum == 4) {
-    arrOfNumsBeforeAddZeros.push("1", "5");
-    return arrOfNumsBeforeAddZeros;
+    if (numsOfZerosToAddToEnd > 0) {
+      arrOfNumsBeforeAddZeros.push(
+        "1".concat(addTheseManyZeros),
+        "5".concat(addTheseManyZeros)
+      );
+      return arrOfNumsBeforeAddZeros;
+    } else {
+      arrOfNumsBeforeAddZeros.push("1", "5");
+      return arrOfNumsBeforeAddZeros;
+    }
   }
   if (checkNumAndLoopThisNum == 9) {
-    arrOfNumsBeforeAddZeros.push("1", "10");
-    return arrOfNumsBeforeAddZeros;
+    if (numsOfZerosToAddToEnd > 0) {
+      arrOfNumsBeforeAddZeros.push(
+        "1".concat(addTheseManyZeros),
+        "10".concat(addTheseManyZeros)
+      );
+      return arrOfNumsBeforeAddZeros;
+    }
   }
   if (checkNumAndLoopThisNum < 5) {
-    for (let i = 0; i < checkNumAndLoopThisNum; i++) {
-      arrOfNumsBeforeAddZeros.push("1");
+    if (numsOfZerosToAddToEnd > 0) {
+      for (let i = 0; i < checkNumAndLoopThisNum; i++) {
+        arrOfNumsBeforeAddZeros.push("1".concat(addTheseManyZeros));
+      }
+      return arrOfNumsBeforeAddZeros;
     }
-    return arrOfNumsBeforeAddZeros;
   } else {
-    arrOfNumsBeforeAddZeros.push("5");
-    for (let i = 6; i <= checkNumAndLoopThisNum; i++) {
-      arrOfNumsBeforeAddZeros.push("1");
+    if (numsOfZerosToAddToEnd > 0) {
+      arrOfNumsBeforeAddZeros.push("5".concat(addTheseManyZeros));
+      for (let i = 6; i <= checkNumAndLoopThisNum; i++) {
+        arrOfNumsBeforeAddZeros.push("1".concat(addTheseManyZeros));
+      }
+      return arrOfNumsBeforeAddZeros;
     }
-    return arrOfNumsBeforeAddZeros;
   }
 }
 // [1000, 900, 80, 5].forEach(function findLength(eachValue) {
