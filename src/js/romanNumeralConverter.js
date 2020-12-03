@@ -24,11 +24,11 @@ function convertToRoman(num) {
   return num;
 }
 /*helper functions*/
-function getDigit(num) {
+function getDigit(numInput, objInput) {
   /*Math.pow(10, 0): will be 1. Math.pow(10, 1) will be 10*/
-  var lengthOfLoop = digitCount(num);
-  var valueOfNum = [];
-  var lengthOfEachValue = [];
+  var lengthOfLoop = digitCount(numInput);
+  // var valueOfNum = [];
+  // var lengthOfEachValue = [];
 
   //looping lengthOfLoop
   /*arrayOfObjs will be [{value: 1000, length: 4}, {value: 900, length: 3}]*/
@@ -39,9 +39,10 @@ function getDigit(num) {
     */
     let placedToTheTenth = Math.pow(10, i);
     let eachValue =
-      (Math.floor(Math.abs(num) / Math.pow(10, i)) % 10) * placedToTheTenth;
-    valueOfNum.unshift(eachValue);
-    lengthOfEachValue.unshift(digitCount(eachValue));
+      (Math.floor(Math.abs(numInput) / Math.pow(10, i)) % 10) *
+      placedToTheTenth;
+    // valueOfNum.unshift(eachValue);
+    // lengthOfEachValue.unshift(digitCount(eachValue));
     arrayOfObjs.unshift({
       value: String(eachValue),
       length: digitCount(eachValue),
@@ -58,8 +59,17 @@ function getDigit(num) {
   /*** implement function that will return an array of subarrays: if we passded in 1985 we want an array that look like this:
    * we want the array to hold string type of these values.
    * [[1000], [100,1000],[50,10,10,10],[5]] then we can loop through this array and convert it to romanNumeral
+   works
+   * 
    * ***/
-  console.log(valuesBeforeConvert);
+  var convertToRomanNumeral = valuesBeforeConvert.flat();
+  var romanNumeralFormat = convertToRomanNumeral
+    .map(function convertToRoman(eachValue) {
+      return objInput[eachValue];
+    })
+    .join("");
+
+  return romanNumeralFormat;
 }
 
 function digitCount(num) {
@@ -80,56 +90,71 @@ function calculateNumsBeforeConvert(valueInput, lengthInput) {
   //   typeof objOfZeros[numsOfZerosToAddToEnd]
   // );
   var checkNumAndLoopThisNum = Number(valueInput[0]);
-  var arrOfNumsBeforeAddZeros = [];
+  var arrOfNumsAndAddZeros = [];
   /*** using triple equal just incase we can a string of 0, empty string "" or empty array [] ***/
   if (checkNumAndLoopThisNum == 5) {
     //.push() will return the length SO WE WERE PUSHING/RETURNING THE LENGTH TO OUR MAP METHOD. THAT IS WHY OUR ARRAY LOOKED LIKED THIS: [["1"],1,["5","1","1","1"],1]
     if (numsOfZerosToAddToEnd > 0) {
-      arrOfNumsBeforeAddZeros.push("5".concat(addTheseManyZeros));
-      return arrOfNumsBeforeAddZeros;
+      arrOfNumsAndAddZeros.push("5".concat(addTheseManyZeros));
+      return arrOfNumsAndAddZeros;
     } else {
-      arrOfNumsBeforeAddZeros.push("5");
-      return arrOfNumsBeforeAddZeros;
+      arrOfNumsAndAddZeros.push("5");
+      return arrOfNumsAndAddZeros;
     }
   }
   if (checkNumAndLoopThisNum == 4) {
     if (numsOfZerosToAddToEnd > 0) {
-      arrOfNumsBeforeAddZeros.push(
+      arrOfNumsAndAddZeros.push(
         "1".concat(addTheseManyZeros),
         "5".concat(addTheseManyZeros)
       );
-      return arrOfNumsBeforeAddZeros;
+      return arrOfNumsAndAddZeros;
     } else {
-      arrOfNumsBeforeAddZeros.push("1", "5");
-      return arrOfNumsBeforeAddZeros;
+      arrOfNumsAndAddZeros.push("1", "5");
+      return arrOfNumsAndAddZeros;
     }
   }
   if (checkNumAndLoopThisNum == 9) {
     if (numsOfZerosToAddToEnd > 0) {
-      arrOfNumsBeforeAddZeros.push(
+      arrOfNumsAndAddZeros.push(
         "1".concat(addTheseManyZeros),
         "10".concat(addTheseManyZeros)
       );
-      return arrOfNumsBeforeAddZeros;
+      return arrOfNumsAndAddZeros;
+    } else {
+      arrOfNumsAndAddZeros.push("1", "10");
+      return arrOfNumsAndAddZeros;
     }
   }
   if (checkNumAndLoopThisNum < 5) {
     if (numsOfZerosToAddToEnd > 0) {
       for (let i = 0; i < checkNumAndLoopThisNum; i++) {
-        arrOfNumsBeforeAddZeros.push("1".concat(addTheseManyZeros));
+        arrOfNumsAndAddZeros.push("1".concat(addTheseManyZeros));
       }
-      return arrOfNumsBeforeAddZeros;
+      return arrOfNumsAndAddZeros;
+    } else {
+      for (let i = 0; i < checkNumAndLoopThisNum; i++) {
+        arrOfNumsAndAddZeros.push("1");
+      }
+      return arrOfNumsAndAddZeros;
     }
   } else {
     if (numsOfZerosToAddToEnd > 0) {
-      arrOfNumsBeforeAddZeros.push("5".concat(addTheseManyZeros));
+      arrOfNumsAndAddZeros.push("5".concat(addTheseManyZeros));
       for (let i = 6; i <= checkNumAndLoopThisNum; i++) {
-        arrOfNumsBeforeAddZeros.push("1".concat(addTheseManyZeros));
+        arrOfNumsAndAddZeros.push("1".concat(addTheseManyZeros));
       }
-      return arrOfNumsBeforeAddZeros;
+      return arrOfNumsAndAddZeros;
+    } else {
+      arrOfNumsAndAddZeros.push("5");
+      for (let i = 6; i <= checkNumAndLoopThisNum; i++) {
+        arrOfNumsAndAddZeros.push("1");
+      }
+      return arrOfNumsAndAddZeros;
     }
   }
 }
+
 // [1000, 900, 80, 5].forEach(function findLength(eachValue) {
 //   console.log(digitCount(eachValue));
 // });
