@@ -61,16 +61,16 @@ a[href] {
 }
 
 /*** layout ***/
-.wrapper {
+/* .wrapper {
   display: grid;
   grid-template-columns: [col1-start]1em[col1-end col2-start]1fr[col2-end col3-start]1em[col3-end];
   grid-template-rows: auto;
-}
-
+} */
+/* 
 .container {
   grid-column: col1-start / col3-end;
   display: flex;
-}
+} */
 
 .skip-links {
   /* our texts are centered and we didn't have to add width or height*/
@@ -90,6 +90,6 @@ a[href] {
   box-shadow: 0 0 0 0.3em rgba(85, 185, 185, 0.849);
 }
 
-[id="nav"] {
+/* [id="nav"] {
   display: flex;
-}
+} */
