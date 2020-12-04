@@ -53,7 +53,7 @@ function getDigitAndConvertToRomanNums(numInput, objInput) {
     value,
     length,
   }) {
-    return calculateNumsBeforeConvert(value, length);
+    return returnArrayOfNumsBeforeConvert(value, length);
   });
   /*** we will loop through array with our objs. we will pass in the value and length into our function ***/
   /*** implement function that will return an array of subarrays: if we passded in 1985 we want an array that look like this:
@@ -83,7 +83,7 @@ function digitCount(num) {
   return Math.floor(Math.log10(Math.abs(num))) + 1;
 }
 
-function calculateNumsBeforeConvert(valueInput, lengthInput) {
+function returnArrayOfNumsBeforeConvert(valueInput, lengthInput) {
   var numsOfZerosToAddToEnd = lengthInput - 1;
   var objOfZeros = {
     1: "0",
@@ -161,7 +161,7 @@ function calculateNumsBeforeConvert(valueInput, lengthInput) {
   }
 }
 
-/*** Testing something. USED REDUCE METHOD WITH OUR function calculateNumsBeforeConvert
+/*** Testing something. USED REDUCE METHOD WITH OUR function calculateNumsBeforeConvert()
  * since our calculateNumsBeforeConvert returns an array with the string form of our number we can use .reduce() and .concat()
  * we will pass in an array as our initial value to our reduce method then we will use .concat() that will combine the initial value our empty array with the array returned by our
  * calculateNumsBeforeConvert. since .concat() returns a new array with the values in both arrays. the array that is return from .concat() it will be our buildingUp value
