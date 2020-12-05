@@ -24,6 +24,22 @@ body {
   font-size: 2rem;
 }
 
+h1,
+h2,
+h3,
+p,
+body,
+figure,
+figcaption,
+blockquote,
+dl,
+/*
+figcaption has no default margin
+dd has margin-left: 40px*/
+dd {
+  margin: 0;
+}
+
 ul[class],
 li[class] {
   list-style: none;
@@ -37,8 +53,43 @@ picture {
 }
 a[href] {
   text-decoration: none;
+  color: var(--skiplink-fg, teal);
 }
 
 .title {
   color: rgba(255, 255, 255, 1);
 }
+
+/*** layout ***/
+/* .wrapper {
+  display: grid;
+  grid-template-columns: [col1-start]1em[col1-end col2-start]1fr[col2-end col3-start]1em[col3-end];
+  grid-template-rows: auto;
+} */
+/* 
+.container {
+  grid-column: col1-start / col3-end;
+  display: flex;
+} */
+
+.skip-links {
+  /* our texts are centered and we didn't have to add width or height*/
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 2em;
+  background: white;
+  padding: 1em;
+  position: absolute;
+  transform: translateY(-4em);
+  transition: transform 0.5s linear;
+}
+
+.skip-links:focus {
+  transform: translateY(0);
+  outline: 0;
+  box-shadow: 0 0 0 0.3em rgba(85, 185, 185, 0.849);
+}
+
+/* [id="nav"] {
+  display: flex;
+} */
