@@ -72,6 +72,7 @@ a[href] {
   display: flex;
 } */
 
+/*** Utilities: skip links and landmarks ***/
 .skip-links {
   /* our texts are centered and we didn't have to add width or height*/
   display: inline-block;
@@ -88,6 +89,14 @@ a[href] {
   transform: translateY(0);
   outline: 0;
   box-shadow: 0 0 0 0.3em rgba(85, 185, 185, 0.849);
+}
+
+.nav-aria-roles {
+  opacity: 0;
+}
+
+.site-logo > img {
+  max-height: 2.3em;
 }
 
 /* [id="nav"] {
