@@ -95,10 +95,47 @@ a[href] {
   opacity: 0;
 }
 
+/*** hamburger buttons ***/
+
+.menu-toggle {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+.hamburger,
+.hamburger::before,
+.hamburger::after {
+  content: "";
+  display: block;
+  background: #55aee0;
+  width: 1em;
+  height: 0.2em;
+  border-radius: 0.5em;
+}
+
+.hamburger::before {
+  transform: translateY(-0.4em);
+}
+
+.hamburger::after {
+  transform: translateY(0.2em);
+}
+
 .site-logo > img {
   max-height: 2.3em;
 }
 
+[id="nav"] {
+  text-align: center;
+  height: 100vh;
+  margin: 1em 0 0 0;
+}
+
+.nav__list-item.nav__list-item {
+  padding: 2.1em 0;
+  background: white;
+  border: 1px solid black;
+}
 /* [id="nav"] {
   display: flex;
 } */
