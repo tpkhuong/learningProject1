@@ -127,7 +127,8 @@ a[href] {
 
 [id="nav"] {
   text-align: center;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   margin: 1em 0 0 0;
 }
 
