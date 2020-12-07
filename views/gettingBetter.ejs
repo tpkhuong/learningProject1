@@ -19,8 +19,11 @@
         <a href="#footer" class="skip-links">Skip to footer</a>
         <!-- <img src="https://unsplash.it/50/50" alt="some image" /> -->
         <!-- <h1 class="title">This is our header</h1> -->
-        <a href="#" class="site-logo" aria-label="homepage">48in48</a>
-        <nav class="main-nav">
+        <a href="#" class="site-logo" aria-label="homepage"
+          ><img src="/images/48in48_logo.png" alt="48in48 Logo"
+        /></a>
+        <nav class="main-nav" aria-labeledby="main-navbar">
+          <!-- <h2 class="nav-aria-roles" id="main-navbar">Main Nav</h2> -->
           <ul id="nav" class="nav__list">
             <li class="nav__list-item"><a href="">Volunteer</a></li>
             <li class="nav__list-item"><a href="">Nonprofit</a></li>
@@ -29,7 +32,8 @@
             <li class="nav__list-item"><a href="">Contact Us</a></li>
           </ul>
         </nav>
-        <nav class="account">
+        <nav class="account" aria-labeledby="account-navbar">
+          <!-- <h2 class="nav-aria-roles" id="account-navbar">Account Navbar</h2> -->
           <ul class="nav__list">
             <li class="nav__list-item">
               <a href="#" class="nav__link--btn">Login</a>
@@ -39,6 +43,9 @@
             </li>
           </ul>
         </nav>
+        <div class="menu-toggle">
+          <div class="hamburger"></div>
+        </div>
       </header>
       <main>
         <section id="intro" class="home-intro">
