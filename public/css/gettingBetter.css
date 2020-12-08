@@ -122,6 +122,13 @@ a[href] {
   transform: translateY(0.2em);
 }
 
+.open .hamburger {
+}
+.open .hamburger::before {
+}
+.open .hamburger::after {
+}
+
 .site-logo > img {
   max-height: 2.3em;
 }
@@ -137,8 +144,12 @@ a[href] {
   position: absolute;
   width: 100%;
   margin: 0.5em 0 0 0;
+  /* clip-path: circle(0% at top right); */
 }
 
+.show-main-nav {
+  /* clip-path: circle(150%); */
+}
 .nav__list-item.nav__list-item {
   padding: 2.1em 0;
   background: #55aee0;
