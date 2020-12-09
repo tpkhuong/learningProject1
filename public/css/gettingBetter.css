@@ -112,6 +112,8 @@ a[href] {
   width: 1em;
   height: 0.2em;
   border-radius: 0.5em;
+  transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6),
+    opacity 0.5s linear;
 }
 
 .hamburger::before {
@@ -123,10 +125,13 @@ a[href] {
 }
 
 .open .hamburger {
+  transform: rotate(45deg);
 }
 .open .hamburger::before {
+  opacity: 0;
 }
 .open .hamburger::after {
+  transform: translateY(-0.2em) rotate(90deg);
 }
 
 .site-logo > img {
@@ -135,24 +140,26 @@ a[href] {
 
 [id="nav"] {
   text-align: center;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
   margin: 1em 0 0 0;
 }
 
 .main-nav {
+  /* when we didn't have the background on this element or this selector. it didn't cover the whole screen*/
   position: absolute;
   width: 100%;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   margin: 0.5em 0 0 0;
-  /* clip-path: circle(0% at top right); */
+  background: #55aee0;
+  clip-path: circle(0% at top right);
+  transition: clip-path 0.5s linear;
 }
 
 .show-main-nav {
-  /* clip-path: circle(150%); */
+  clip-path: circle(150%);
 }
 .nav__list-item.nav__list-item {
   padding: 2.1em 0;
-  background: #55aee0;
   border: 1px solid #eee;
   --fg: #eee;
 }
@@ -174,6 +181,65 @@ a[href] {
 .account-nav__list-item:last-of-type {
   float: right;
 }
+
+/*** Main section ***/
+.highlight {
+  color: #eee;
+}
+
+[id="intro"] {
+  background: rgb(97, 188, 238);
+  margin: 1em 0 0 0;
+  font-size: 1.6rem;
+  text-align: center;
+  /* background: linear-gradient(
+    322deg,
+    rgba(97, 188, 238, 1) 0%,
+    rgba(155, 212, 244, 1) 9%
+  ); */
+}
+
+[id="intro"] > h1 {
+  font-size: 4.7rem;
+}
+.subscrible {
+  border: 1px solid #eee;
+  background: #ddd;
+  margin: 0.8em 0;
+  padding: 1em;
+  text-align: start;
+  font-size: 2.5rem;
+}
+.intro__paragraph {
+  font-size: 1.6rem;
+}
+
+.subscrible input {
+  display: block;
+  height: 2.1em;
+}
+
+.subscrible label {
+  font-size: 2.1rem;
+}
+
+.intro--form-btn {
+  margin: 1em 0 0 0;
+  background: #55aee0;
+  padding: 0.6em 1.2em;
+  border-radius: 0.5rem;
+  font-size: 1.8rem;
+  color: #eee;
+  font-weight: 900;
+}
+/* 
+getting better
+input:not(:focus-within) {
+  background-color: rgba(215, 185, 185, 0.549);
+}
+input:focus {
+  background-color: rgba(185, 85, 185, 0.549);
+} */
 /* [id="nav"] {
   display: flex;
 } */
