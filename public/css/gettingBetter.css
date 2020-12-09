@@ -293,6 +293,14 @@ a[href] {
   border-top: 0.1em solid #a2c0e5;
 }
 
+.card-price--text {
+  padding: 0.7em 0;
+}
+
+.card-price--text:last-of-type {
+  padding: 0.7em 0 0 0;
+}
+
 .price {
   font-size: 3.5rem;
 }
