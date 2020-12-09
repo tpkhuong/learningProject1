@@ -298,3 +298,13 @@ let observer = new IntersectionObserver(function (entries) {
 target is one more property of the IntersectionObserverEntry interface that you might need to get to quite often. But there is absolutely no magic here –
 it’s just the original element that had been passed to observe() function of your Observer. Just like event.target you’ve got used to when working with events.
 */
+
+/*** codepen playground ***/
+
+// function newHamburgerAnimation() {
+//   var clickedElement = document.querySelector(".menu-toggle");
+
+//   clickedElement.addEventListener("click", function moveStuff(event) {
+//     clickedElement.classList.toggle("open");
+//   });
+// }

@@ -151,6 +151,8 @@ a[href] {
   min-height: -webkit-fill-available;
   margin: 0.5em 0 0 0;
   background: #55aee0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
   clip-path: circle(0% at top right);
   transition: clip-path 0.5s linear;
 }
