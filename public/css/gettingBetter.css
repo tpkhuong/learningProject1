@@ -3,6 +3,7 @@
   --clr-primary: #ee6352;
   --clr-body: #333;
   --clr-bg: #ddd;
+  --inner-space: 1em;
 }
 
 /*** Reset ***/
@@ -149,8 +150,10 @@ a[href] {
   width: 100%;
   min-height: 100vh;
   min-height: -webkit-fill-available;
-  margin: 0.5em 0 0 0;
+  margin: 0.7em 0 0 0;
   background: #55aee0;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
   clip-path: circle(0% at top right);
   transition: clip-path 0.5s linear;
 }
@@ -205,13 +208,14 @@ a[href] {
 .subscrible {
   border: 1px solid #eee;
   background: #ddd;
-  margin: 0.8em 0;
-  padding: 1em;
+  /* margin: 0.8em 0; */
+  padding: var(--inner-space);
   text-align: start;
   font-size: 2.5rem;
 }
 .intro__paragraph {
   font-size: 1.6rem;
+  margin: 0 0 0.5em 0;
 }
 
 .subscrible input {
@@ -231,6 +235,81 @@ a[href] {
   font-size: 1.8rem;
   color: #eee;
   font-weight: 900;
+}
+
+/*** two card sections ***/
+
+.card-container {
+  background: var(--bg, #eee);
+  color: var(--clr-primary);
+  border: 0.5em solid;
+}
+
+.card-container:first-child {
+  padding: 0.5em 1em 0.3em;
+  border-bottom: 0;
+}
+
+.card-container:last-child {
+  padding: 0.2em 1em 0.5em;
+}
+
+.card-title {
+  font-weight: 900;
+  font-size: 3rem;
+}
+
+.card-text {
+  font-size: 1.6rem;
+}
+
+/*** price-cards ***/
+
+[id="three-price-cards"] {
+  text-align: center;
+  background: var(--card-bg, #eee);
+  color: var(--card-fg, #016ff9);
+}
+
+.card-price-container {
+  width: 85%;
+  margin: 0 auto;
+  padding: 0 0 0.5em 0;
+}
+
+.card-price-container:nth-of-type(2) {
+  border-top: 0.1em solid #a2c0e5;
+  border-bottom: 0.1em solid #a2c0e5;
+  /* margin: 0.5em auto 0em; */
+}
+
+.card-price-title {
+  color: #888;
+  font-size: 3.5rem;
+}
+
+.card-price--text {
+  font-size: 1.4rem;
+  border-top: 0.1em solid #a2c0e5;
+}
+
+.card-price--text {
+  padding: 0.7em 0;
+}
+
+.card-price--text:last-of-type {
+  padding: 0.7em 0 0 0;
+}
+
+.price {
+  font-size: 3.5rem;
+}
+
+.card-price-btn {
+  border: 0.1em solid #a2c0e5;
+  padding: 0.7em 2em 0.7em;
+  border-radius: 0.5em;
+  text-transform: uppercase;
 }
 /* 
 getting better
