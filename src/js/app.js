@@ -126,10 +126,7 @@ function makeItDynamic() {
       /*when we had the code firstElementInList which is the <a> the first child element of the <li> element before we add the active class to our div element
       our code did not focus on the first <a>. it worked once we moved the code below the divElement.classList.toggle("active") line.
       */
-<<<<<<< HEAD
-=======
       console.log(firstElementInList);
->>>>>>> feature-navbar-scroll
       firstElementInList.focus();
       listOfListElements.forEach(function loopThroughAnchorElement(currValue) {
         /*we are looping through the array of li but we are listening for a keydown event on the li firstElementChild which is the <a> tag*/
