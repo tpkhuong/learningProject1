@@ -123,6 +123,9 @@ function makeItDynamic() {
       //   console.log(firstElementInList);
       //   console.log(lastElementInList);
       divElement.classList.toggle("active");
+      /*when we had the code firstElementInList which is the <a> the first child element of the <li> element before we add the active class to our div element
+      our code did not focus on the first <a>. it worked once we moved the code below the divElement.classList.toggle("active") line.
+      */
       console.log(firstElementInList);
       firstElementInList.focus();
       listOfListElements.forEach(function loopThroughAnchorElement(currValue) {
