@@ -123,6 +123,8 @@ function makeItDynamic() {
       //   console.log(firstElementInList);
       //   console.log(lastElementInList);
       divElement.classList.toggle("active");
+      console.log(firstElementInList);
+      firstElementInList.focus();
       listOfListElements.forEach(function loopThroughAnchorElement(currValue) {
         currValue.firstElementChild.addEventListener(
           "keydown",
