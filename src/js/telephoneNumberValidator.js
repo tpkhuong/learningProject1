@@ -23,7 +23,7 @@ To only specify the lower number of patterns, keep the first number followed by 
 For example, to match only the string "hah" with the letter a appearing at least 3 times, your regex would be /ha{3,}h/.
  * ***/
 
-var regex = /^1/g;
+var regex = /^1 |^1/g;
 // var regexTwo = /.\d{3}.\d{3}.\d{4}/;
 var regexTwo = /\d+|\W/g;
 var regexTest = /[\W\s]\d+[\W\s]\d{3}.\d{4}/g;
