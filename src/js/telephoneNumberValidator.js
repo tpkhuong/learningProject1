@@ -13,9 +13,23 @@ Your job is to validate or reject the US phone number based on any combination o
 The area code is required. If the country code is provided, you must confirm that the country code is 1. Return true if the string is a valid US phone number; otherwise return false.
  * **/
 
-var regex = /^1/g;
+/*** 
+ * Specify Only the Lower Number of MatchesPassed
+You can specify the lower and upper number of patterns with quantity specifiers using curly brackets.
+Sometimes you only want to specify the lower number of patterns with no upper limit.
+
+To only specify the lower number of patterns, keep the first number followed by a comma.
+
+For example, to match only the string "hah" with the letter a appearing at least 3 times, your regex would be /ha{3,}h/.
+ * ***/
+
+var regex = /^1 |^1/g;
 // var regexTwo = /.\d{3}.\d{3}.\d{4}/;
-var regexTest = /[\W\s]\d{3}[\W|\s]\d{3}.\d{4}/g;
+var regexTwo = /\d+|\W/g;
+var regexTest = /[\W\s]\d+[\W\s]\d{3}.\d{4}/g;
+var regexTestTwo = /^.{4,}\d{3}.\d{4}/g;
+var regexTestThree = /[\W\s]{2,}\d{3}.\d{4}/g;
+var regexTestFour = /[(\s]\d+[)\s]{1,2}\d{3}.\d{4}/g;
 
 
 function telephoneCheck(strInput) {
