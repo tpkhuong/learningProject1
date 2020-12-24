@@ -22,8 +22,10 @@ Five Dollars	$5 (FIVE)
 Ten Dollars	$10 (TEN)
 Twenty Dollars	$20 (TWENTY)
 One-hundred Dollars	$100 (ONE HUNDRED)
+
 See below for an example of a cash-in-drawer array:
 
+//[String, number]
 [
   ["PENNY", 1.01],
   ["NICKEL", 2.05],
@@ -36,3 +38,23 @@ See below for an example of a cash-in-drawer array:
   ["ONE HUNDRED", 100]
 ]
  * ***/
+
+function checkCashRegister(price, cash, cid) {
+  //we want to use .toFixed(2) on our number to keep it at 2 decimals
+  //cid is an array with subarrays
+  //let's get total of cash in drawer first
+  var totalOfCID = calculateTotalOfCashInDrawer(cid);
+  var change;
+  return change;
+}
+
+function calculateTotalOfCashInDrawer(listInput) {
+  var total = listInput.reduce(function addSecondValueInArr(
+    buildingUp,
+    eachSubarray
+  ) {
+    return (buildingUp += eachSubarray[1]);
+  },
+  0);
+  console.log(total.toFixed(2));
+}
