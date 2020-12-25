@@ -39,6 +39,17 @@ See below for an example of a cash-in-drawer array:
 ]
  * ***/
 
+//we want to return an object with {status: "string", change:[array]}
+// return change;
+//make an object with converted string to currency
+/*
+  {
+    currency: "PENNY",
+    valueInDecimal: .01,
+    quantities: 
+  }
+  */
+
 /***
  * This problem is easier when you know the value of each bill or coin you are working with, rather than just the sum of each in the register.
  * For example, it’s useful to know that a nickel is worth .05, along with the fact that you have $2.05 worth of nickels in the cash register.
@@ -65,6 +76,14 @@ function checkCashRegister(price, cash, cid) {
     console.log(convertToDecimal[eachStr]);
   });
   */
+
+  var reversedCID = [];
+
+  for (let i = cid.length - 1; 0 <= i; i--) {
+    var eachValue = cid[i];
+    reversedCID.push(eachValue);
+  }
+
   var convertToDecimal = {
     PENNY: 0.01,
     NICKEL: 0.05,
@@ -77,21 +96,27 @@ function checkCashRegister(price, cash, cid) {
     "ONE HUNDRED": 100,
   };
 
-  var objOfCurrAndQuantites = objToUseInFundsCalculation(convertToDecimal, cid);
+  var objOfCurrAndQuantities = objToUseInFundsCalculation(
+    convertToDecimal,
+    cid
+  );
   var totalOfCID = Number(calculateTotalOfCashInDrawer(cid));
   var change = cash - price;
-  console.log(typeof totalOfCID);
-  if (change > totalOfCID) return { status: "INSUFFICIENT_FUNDS", change: [] };
-  //we want to return an object with {status: "string", change:[array]}
-  // return change;
-  //make an object with converted string to currency
-  /*
-  {
-    currency: "PENNY",
-    valueInDecimal: .01,
-    quantities: 
+  // console.log(typeof totalOfCID);
+  if (change > totalOfCID) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  } else if (change < totalOfCID) {
+    //if the value of the currency in the CID is greater than the change we want to filter that out.
+    var currThatIsLessThanChange = reversedCID.filter(
+      function getLessThanValues([strCurrency, valueOfCurInCID]) {
+        return valueOfCurInCID < change;
+      }
+    );
+    console.log(currThatIsLessThanChange);
+    return { status: "OPEN", change: [] };
+  } else {
+    return { status: "CLOSED", change: [] };
   }
-  */
 }
 
 function calculateTotalOfCashInDrawer(listInput) {
@@ -106,16 +131,22 @@ function calculateTotalOfCashInDrawer(listInput) {
 }
 
 function objToUseInFundsCalculation(objInput, cidInput) {
-  return cidInput.map(function doStuff(eachSubarray) {
-    var strValueOfCurr = eachSubarray[0];
-    var numValueOfCurr = eachSubarray[1];
+  return cidInput.map(function calculateQuanity(eachSubarray) {
+    var currencyString = eachSubarray[0];
+    var totalOfCurInCID = eachSubarray[1];
     var calculatedQuanity = Number(
-      (numValueOfCurr / objInput[strValueOfCurr]).toFixed()
+      (totalOfCurInCID / objInput[currencyString]).toFixed()
     );
     return {
-      currency: strValueOfCurr,
-      valueInDecimal: objInput[strValueOfCurr],
+      currency: currencyString,
+      totalOfCurInCID,
+      valueInDecimal: objInput[currencyString],
       quantities: calculatedQuanity,
     };
   });
 }
+/***
+ * checkCashRegister(3.26, 100,
+ * [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60],
+ * ["ONE HUNDRED", 100]]) should return {status: "OPEN", change: [["TWENTY", 60], ["TEN", 20], ["FIVE", 15], ["ONE", 1], ["QUARTER", 0.5], ["DIME", 0.2], ["PENNY", 0.04]]}
+ * ***/
