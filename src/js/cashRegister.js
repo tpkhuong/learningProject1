@@ -125,11 +125,12 @@ function checkCashRegister(price, cash, cid) {
         return convertToDecimal[strCurrency] < change;
       }
     );
-    var copyOfCidArray = [...reversedCID];
     let copiedChanged = change;
     */
     let arrOfChangeAndQuantities = [];
     /*** calculate newChange for each iteration and pass it to the next iteration? ***/
+    var copyOfCidArray = [...reversedCID];
+
     /*** before calling reduce to perform calculation ***/
     var saveThisValue = objOfCurrAndQuantities.reduce(function mainCalculations(
       buildingUp,
@@ -140,13 +141,15 @@ function checkCashRegister(price, cash, cid) {
       var arrWePassIntoHelperFunc = ourList.slice(currentIndex);
       var objOfValuesFromHelperFunc = findAndSortQuantityAndCalculateNewChange(
         arrWePassIntoHelperFunc,
-        currentValue,
+        arrOfChangeAndQuantities,
         buildingUp
       );
       //we can calculate newChnage in our findAndSortQuantityAndCalculateNewChange function return it as a value in an obj
       //return that newChange which will be used as buildingUp in the next iteration.
       var { newChange, addThisArr } = objOfValuesFromHelperFunc;
       arrOfChangeAndQuantities.push(addThisArr);
+      /*** updating our copied array of cash in drawer ***/
+
       return newChange;
     },
     change);
@@ -157,11 +160,49 @@ function checkCashRegister(price, cash, cid) {
   }
   function findAndSortQuantityAndCalculateNewChange(
     arrInput,
-    objInput,
+    listInput,
     changeInput
   ) {
-    var changeDivideByEachCurrency = []; //sort this array, use shift() to get the
-    arrInput.forEach(function valuePushedIntoArr(eachItem) {
+    //sort this array, use shift() to get the var changeDivideByEachCurrency = [];
+    //we don't want to want to check currencyFormatTwice "PENNY" or "TWENTY" it was used in the calculation of the newChange.
+    var justStrFormsOfCurrency = listInput.reduce(function getStrForms(
+      buildingUp,
+      currentValue
+    ) {
+      return buildingUp.concat(currentValue[0]);
+    },
+    []);
+
+    var currFormatNotUsedToCalcNewChange = arrInput.filter(
+      function notInJustStrFormArr({ currency }) {
+        return !justStrFormsOfCurrency.includes(currency);
+      }
+    );
+    /*** use reduce ***/
+
+    var changeDivideByEachCurrency = currFormatNotUsedToCalcNewChange.reduce(
+      function valuesPushedIntoArr(buildingUp, currentValue) {
+        var pushThisValueIntoArrBeforeSorting;
+        if (currentValue.currencyInNumFormat < changeInput) {
+          pushThisValueIntoArrBeforeSorting =
+            changeInput / currentValue.currencyInNumFormat;
+        } else {
+          return buildingUp;
+        }
+
+        return buildingUp.concat([
+          {
+            dividedValue: Math.floor(pushThisValueIntoArrBeforeSorting),
+            strFormatOfValue: currentValue.currency,
+            currInNumForm: currentValue.currencyInNumFormat,
+            quantitiesInFindAndSortFunc: currentValue.quantities,
+          },
+        ]);
+      },
+      []
+    );
+    /* forEach method 
+    arrInput.forEach(function valuesPushedIntoArr(eachItem) {
       var pushThisValueIntoArrBeforeSorting;
       if (eachItem.currencyInNumFormat < changeInput) {
         pushThisValueIntoArrBeforeSorting =
@@ -173,7 +214,7 @@ function checkCashRegister(price, cash, cid) {
         currInNumForm: eachItem.currencyInNumFormat,
       });
     });
-
+    */
     var sortedArray = changeDivideByEachCurrency.sort(function sortPlease(
       { dividedValue: a },
       { dividedValue: b }
@@ -182,17 +223,20 @@ function checkCashRegister(price, cash, cid) {
       if (a > b) return 1;
       return 0;
     });
+
     var {
       dividedValue: lowestValueInSortedArr,
       strFormatOfValue,
       currInNumForm,
+      quantitiesInFindAndSortFunc,
     } = sortedArray.shift();
 
-    var otherValueToCompare;
-    if (strFormatOfValue == objInput.currency) {
-      otherValueToCompare = objInput.quantities;
-    }
-    var valueOfQuantityToAddToChangeArr = Math.min(
+    //need to get the quantities of that match the strFormOfTheCurrency
+    // if (strFormatOfValue == objInput.currency) {
+    //   otherValueToCompare = objInput.quantities;
+    // }
+    var otherValueToCompare = quantitiesInFindAndSortFunc;
+    var valueOfQuantityToAddToChangeArrAndMultiply = Math.min(
       lowestValueInSortedArr,
       otherValueToCompare
     ); //we want to subtract this value/quantity from the original array which is an array of subarray with ["PENNY", Quantity].
@@ -202,13 +246,24 @@ function checkCashRegister(price, cash, cid) {
     var newCalculatedChange = changeInput - subtractThisFromChange;
     var arrOfCurrInStringFormatAndQuantity = [
       strFormatOfValue,
-      valueOfQuantityToAddToChangeArr,
+      subtractThisFromChange,
     ];
     return {
       addThisArr: arrOfCurrInStringFormatAndQuantity,
-      newChange: newCalculatedChange,
+      newChange: Number(newCalculatedChange.toFixed(2)),
     };
   }
+}
+
+function updateCID(copiedArrInput, singleArrInput) {
+  //loop through array. look for stringForm of currency.
+  copiedArrInput.forEach(function updateOurCopiedArr(eachArray, currentIndex) {
+    if (eachArray.includes(singleArrInput[0])) {
+      copiedArrInput.splice(currentIndex, 1, singleArrInput);
+    }
+  });
+
+  console.log(copiedArrInput);
 }
 
 function calculateTotalOfCashInDrawer(listInput) {
@@ -242,4 +297,16 @@ function objToUseInFundsCalculation(objInput, cidInput) {
  * checkCashRegister(3.26, 100,
  * [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60],
  * ["ONE HUNDRED", 100]]) should return {status: "OPEN", change: [["TWENTY", 60], ["TEN", 20], ["FIVE", 15], ["ONE", 1], ["QUARTER", 0.5], ["DIME", 0.2], ["PENNY", 0.04]]}
+ *
  * ***/
+
+/*** get the stringFormOfOurCurrency 
+ 
+ works!
+var getStrForm = [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90]];
+
+var strForms = getStrForm.reduce((buildingUp, currentValue) => {
+  return buildingUp.concat(currentValue[0]);
+}, [])
+
+***/
