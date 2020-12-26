@@ -131,7 +131,9 @@ function checkCashRegister(price, cash, cid) {
     /*** calculate newChange for each iteration and pass it to the next iteration? ***/
     var copyOfCidArray = [...reversedCID];
 
-    /*** before calling reduce to perform calculation ***/
+    var checkIfChangeIsZero = change;
+    /*** before calling reduce to perform calculation 
+
     var saveThisValue = objOfCurrAndQuantities.reduce(function mainCalculations(
       buildingUp,
       currentValue,
@@ -148,13 +150,32 @@ function checkCashRegister(price, cash, cid) {
       //return that newChange which will be used as buildingUp in the next iteration.
       var { newChange, addThisArr } = objOfValuesFromHelperFunc;
       arrOfChangeAndQuantities.push(addThisArr);
-      /*** updating our copied array of cash in drawer ***/
-
+    /*** updating our copied array of cash in drawer /
       return newChange;
     },
-    change);
-    console.log(saveThisValue);
-    return { status: "OPEN", change: [] };
+    change);***/
+    //we might have to use a for loop
+
+    for (let i = 0; i < objOfCurrAndQuantities.length; i++) {
+      var arrWePassIntoHelperFunc = objOfCurrAndQuantities.slice(i);
+      var objOfValuesFromHelperFunc = findAndSortQuantityAndCalculateNewChange(
+        arrWePassIntoHelperFunc,
+        arrOfChangeAndQuantities,
+        checkIfChangeIsZero
+      );
+      var { newChange, addThisArr } = objOfValuesFromHelperFunc;
+      arrOfChangeAndQuantities.push(addThisArr);
+      checkIfChangeIsZero = newChange;
+      if (checkIfChangeIsZero == 0) break;
+    }
+    /*** this array has the values we want to use to get our answer: strForm, updatedQuantities, valueToSubtract: [[strForm, updatedQuantities, valueToSubtract]] ***/
+    var spreadThisArr = arrOfChangeAndQuantities.map(
+      function getStrFormAndValueToSubtract([strForm, valueToSubtract]) {
+        return [strForm, valueToSubtract];
+      }
+    );
+    console.log(spreadThisArr);
+    return { status: "OPEN", change: [...spreadThisArr] };
   } else {
     return { status: "CLOSED", change: [] };
   }
@@ -247,6 +268,7 @@ function checkCashRegister(price, cash, cid) {
     var arrOfCurrInStringFormatAndQuantity = [
       strFormatOfValue,
       subtractThisFromChange,
+      valueOfQuantityToAddToChangeArrAndMultiply,
     ];
     return {
       addThisArr: arrOfCurrInStringFormatAndQuantity,
