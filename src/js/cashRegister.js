@@ -127,7 +127,7 @@ function checkCashRegister(price, cash, cid) {
     );
     let copiedChanged = change;
     */
-    let arrOfChangeAndQuantities = [];
+    let arrOfStrformValuetosubtractAndUpdatedquantities = [];
     /*** calculate newChange for each iteration and pass it to the next iteration? ***/
     var copyOfCidArray = [...reversedCID];
 
@@ -143,13 +143,13 @@ function checkCashRegister(price, cash, cid) {
       var arrWePassIntoHelperFunc = ourList.slice(currentIndex);
       var objOfValuesFromHelperFunc = findAndSortQuantityAndCalculateNewChange(
         arrWePassIntoHelperFunc,
-        arrOfChangeAndQuantities,
+        arrOfStrformValuetosubtractAndUpdatedQuantities,
         buildingUp
       );
       //we can calculate newChnage in our findAndSortQuantityAndCalculateNewChange function return it as a value in an obj
       //return that newChange which will be used as buildingUp in the next iteration.
       var { newChange, addThisArr } = objOfValuesFromHelperFunc;
-      arrOfChangeAndQuantities.push(addThisArr);
+      arrOfStrformValuetosubtractAndUpdatedQuantities.push(addThisArr);
     /*** updating our copied array of cash in drawer /
       return newChange;
     },
@@ -160,19 +160,24 @@ function checkCashRegister(price, cash, cid) {
       var arrWePassIntoHelperFunc = objOfCurrAndQuantities.slice(i);
       var objOfValuesFromHelperFunc = findAndSortQuantityAndCalculateNewChange(
         arrWePassIntoHelperFunc,
-        arrOfChangeAndQuantities,
+        arrOfStrformValuetosubtractAndUpdatedquantities,
         checkIfChangeIsZero
       );
       var { newChange, addThisArr } = objOfValuesFromHelperFunc;
-      arrOfChangeAndQuantities.push(addThisArr);
+      arrOfStrformValuetosubtractAndUpdatedquantities.push(addThisArr);
       checkIfChangeIsZero = newChange;
       if (checkIfChangeIsZero == 0) break;
     }
-    /*** this array has the values we want to use to get our answer: strForm, updatedQuantities, valueToSubtract: [[strForm, updatedQuantities, valueToSubtract]] ***/
-    var spreadThisArr = arrOfChangeAndQuantities.map(
+    /*** this array has the values we want to use to get our answer: strForm, updatedQuantities, valueToSubtract: [[strForm, valueToSubtract, updatedQuantities]] ***/
+    var spreadThisArr = arrOfStrformValuetosubtractAndUpdatedquantities.map(
       function getStrFormAndValueToSubtract([strForm, valueToSubtract]) {
         return [strForm, valueToSubtract];
       }
+    );
+    /*** updateCID ***/
+    var updatedCidArray = updateCID(
+      copyOfCidArray,
+      arrOfStrformValuetosubtractAndUpdatedquantities
     );
     console.log(spreadThisArr);
     return { status: "OPEN", change: [...spreadThisArr] };
@@ -277,13 +282,52 @@ function checkCashRegister(price, cash, cid) {
   }
 }
 
-function updateCID(copiedArrInput, singleArrInput) {
+function updateCID(copiedArrInput, updatedValuesArr) {
   //loop through array. look for stringForm of currency.
-  copiedArrInput.forEach(function updateOurCopiedArr(eachArray, currentIndex) {
-    if (eachArray.includes(singleArrInput[0])) {
-      copiedArrInput.splice(currentIndex, 1, singleArrInput);
+  var getStrFormForUpdateCidFunc = updatedValuesArr.reduce(
+    function strFormForUpdateFunc(buildingUp, [stringForm]) {
+      return buildingUp.concat(stringForm);
+    },
+    []
+  );
+  var objFormOfUpdatedValuesArr = updatedValuesArr.reduce(function turnToObj(
+    buildingUp,
+    [strFormInUpdateCID, valueInUpdateCIDFunc]
+  ) {
+    return buildingUp.concat({
+      strFormInUpdateCID,
+      valueInUpdateCIDFunc,
+    });
+  },
+  []);
+
+  console.log(objFormOfUpdatedValuesArr);
+  var filteredArrOfOriginalArray = copiedArrInput.filter(
+    function strFormMatched([filterMethodStringForm]) {
+      return getStrFormForUpdateCidFunc.includes(filterMethodStringForm);
     }
-  });
+  );
+
+  console.log(filteredArrOfOriginalArray);
+  copiedArrInput.reduce(function subtractThenUpdate(buildingUp, currentValue) {
+    var [reduceStringForm, valueOfOriginalInCid] = currentValue;
+    if (getStrFormForUpdateCidFunc.includes(reduceStringForm)) {
+      //get the object with the matched strForm
+      let { valueInUpdateCIDFunc: valueToSubtract } = objFormOfUpdatedValuesArr
+        .filter(function findThatObjThatMatchTheStrForm({
+          strFormInUpdateCID,
+        }) {
+          return reduceStringForm == strFormInUpdateCID;
+        })
+        .pop();
+      // console.log(filterOurObjArr);
+      // let { valueInUpdateCIDFunc: valueToSubtract } = filterOurObjArr[0];
+      let updatedValueToAddToCID = valueOfOriginalInCid - valueToSubtract;
+      console.log(updatedValueToAddToCID);
+    } else {
+      return buildingUp.concat(currentValue);
+    }
+  }, []);
 
   console.log(copiedArrInput);
 }
