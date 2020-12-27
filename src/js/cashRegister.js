@@ -309,7 +309,10 @@ function updateCID(copiedArrInput, updatedValuesArr) {
   );
 
   console.log(filteredArrOfOriginalArray);
-  copiedArrInput.reduce(function subtractThenUpdate(buildingUp, currentValue) {
+  var whatIsThisValues = copiedArrInput.reduce(function subtractThenUpdate(
+    buildingUp,
+    currentValue
+  ) {
     var [reduceStringForm, valueOfOriginalInCid] = currentValue;
     if (getStrFormForUpdateCidFunc.includes(reduceStringForm)) {
       //get the object with the matched strForm
@@ -324,12 +327,16 @@ function updateCID(copiedArrInput, updatedValuesArr) {
       // let { valueInUpdateCIDFunc: valueToSubtract } = filterOurObjArr[0];
       let updatedValueToAddToCID = valueOfOriginalInCid - valueToSubtract;
       console.log(updatedValueToAddToCID);
+      buildingUp.push([reduceStringForm, updatedValueToAddToCID]);
+      return buildingUp;
     } else {
-      return buildingUp.concat(currentValue);
+      buildingUp.push(currentValue);
+      return buildingUp;
     }
-  }, []);
+  },
+  []);
 
-  console.log(copiedArrInput);
+  console.log(whatIsThisValues);
 }
 
 function calculateTotalOfCashInDrawer(listInput) {
