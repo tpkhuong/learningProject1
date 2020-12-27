@@ -179,7 +179,7 @@ function checkCashRegister(price, cash, cid) {
       copyOfCidArray,
       arrOfStrformValuetosubtractAndUpdatedquantities
     );
-    console.log(spreadThisArr);
+    console.log(updatedCidArray);
     return { status: "OPEN", change: [...spreadThisArr] };
   } else {
     return { status: "CLOSED", change: [] };
@@ -302,6 +302,7 @@ function updateCID(copiedArrInput, updatedValuesArr) {
   []);
 
   console.log(objFormOfUpdatedValuesArr);
+  /*** not sure we need this filteredArray ***/
   var filteredArrOfOriginalArray = copiedArrInput.filter(
     function strFormMatched([filterMethodStringForm]) {
       return getStrFormForUpdateCidFunc.includes(filterMethodStringForm);
@@ -309,34 +310,35 @@ function updateCID(copiedArrInput, updatedValuesArr) {
   );
 
   console.log(filteredArrOfOriginalArray);
-  var whatIsThisValues = copiedArrInput.reduce(function subtractThenUpdate(
-    buildingUp,
-    currentValue
-  ) {
-    var [reduceStringForm, valueOfOriginalInCid] = currentValue;
-    if (getStrFormForUpdateCidFunc.includes(reduceStringForm)) {
-      //get the object with the matched strForm
-      let { valueInUpdateCIDFunc: valueToSubtract } = objFormOfUpdatedValuesArr
-        .filter(function findThatObjThatMatchTheStrForm({
-          strFormInUpdateCID,
-        }) {
-          return reduceStringForm == strFormInUpdateCID;
-        })
-        .pop();
-      // console.log(filterOurObjArr);
-      // let { valueInUpdateCIDFunc: valueToSubtract } = filterOurObjArr[0];
-      let updatedValueToAddToCID = valueOfOriginalInCid - valueToSubtract;
-      console.log(updatedValueToAddToCID);
-      buildingUp.push([reduceStringForm, updatedValueToAddToCID]);
-      return buildingUp;
-    } else {
-      buildingUp.push(currentValue);
-      return buildingUp;
-    }
-  },
-  []);
+  var cidUpdatedWithCurrentValues = copiedArrInput.reduce(
+    function subtractThenUpdate(buildingUp, currentValue) {
+      var [reduceStringForm, valueOfOriginalInCid] = currentValue;
+      if (getStrFormForUpdateCidFunc.includes(reduceStringForm)) {
+        //get the object with the matched strForm
+        let {
+          valueInUpdateCIDFunc: valueToSubtract,
+        } = objFormOfUpdatedValuesArr
+          .filter(function findThatObjThatMatchTheStrForm({
+            strFormInUpdateCID,
+          }) {
+            return reduceStringForm == strFormInUpdateCID;
+          })
+          .pop();
+        // console.log(filterOurObjArr);
+        // let { valueInUpdateCIDFunc: valueToSubtract } = filterOurObjArr[0];
+        let updatedValueToAddToCID = valueOfOriginalInCid - valueToSubtract;
+        console.log(updatedValueToAddToCID);
+        buildingUp.push([reduceStringForm, updatedValueToAddToCID]);
+        return buildingUp;
+      } else {
+        buildingUp.push(currentValue);
+        return buildingUp;
+      }
+    },
+    []
+  );
 
-  console.log(whatIsThisValues);
+  return cidUpdatedWithCurrentValues;
 }
 
 function calculateTotalOfCashInDrawer(listInput) {
