@@ -61,13 +61,21 @@ body {
   line-height: 1.6;
   display: grid;
 
-  grid-template-columns: 1fr 5fr 2fr 1fr;
+  /* grid-template-columns: 1fr 5fr 2fr 1fr;
   grid-template-rows: 10em 50vh auto 10em;
   grid-template-areas:
     "header header header header"
     "hero hero hero hero"
     ". content sidebar ."
-    "footer footer footer footer";
+    "footer footer footer footer"; */
+  grid-template:
+    "header header header header" 10em
+    "hero hero hero hero" 50vh
+    ". content sidebar ." auto
+    "footer footer footer footer" 10em / 1fr minmax(30em, 5fr) minmax(
+      15em,
+      2fr
+    ) 1fr;
   column-gap: 1em;
 }
 
