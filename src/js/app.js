@@ -2,6 +2,30 @@
 but if you want to check whether Intersection Observer is supported while you’re working with it, you could see if the property IntersectionObserver exists in the window object:
 ***/
 
+/*** 
+ * If you’re ever unsure of what type of JavaScript
+object you’re working with, you can print its
+constructor.name property to the console
+
+write this:
+
+var ns = {svg: "http://www.w3.org/2000/svg",
+xlink: "http://www.w3.org/1999/xlink"};
+var svg = document.createElementNS(ns.svg, "svg");
+var use = document.createElementNS(ns.svg, "use");
+use.setAttributeNS(ns.xlink, "href", "#icon");
+svg.appendChild(use);
+document.body.appendChild(svg);
+
+not this:
+
+var svg = document.createElement("svg");
+var use = document.createElement("use");
+use.setAttribute("xlink:href", "#icon");
+svg.appendChild(use);
+document.body.appendChild(svg);
+ * ***/
+
 /* listen for event on nav bar parent element */
 var parentElement = document.querySelector(".container .link__list");
 var listenElement = document.querySelector(".second-sub");
