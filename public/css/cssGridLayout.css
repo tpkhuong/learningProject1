@@ -69,13 +69,11 @@ body {
     ". content sidebar ."
     "footer footer footer footer"; */
   grid-template:
-    "header header header header" 10em
+    "header header header header" 5em
     "hero hero hero hero" 50vh
     ". content sidebar ." auto
-    "footer footer footer footer" 10em / 1fr minmax(30em, 5fr) minmax(
-      15em,
-      2fr
-    ) 1fr;
+    "footer footer footer footer" 10em / 1fr minmax(30em, 5fr) minmax(15em, 2fr)
+    1fr;
   column-gap: 1em;
 }
 
@@ -125,6 +123,17 @@ aside {
 }
 footer {
   grid-area: footer;
+  display: flex;
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* if we don't want to use flex */
+  /* text-align: center;
+  line-height: 7em; */
+}
+
+.footer-title {
+  /* this is an element/child of a parent element with display: flex. another way to center an element */
+  margin: auto;
 }
 
 .card {

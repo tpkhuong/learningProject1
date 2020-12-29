@@ -78,6 +78,7 @@ picture {
 
 a[href] {
   text-decoration: none;
+  /* background: #fff; */
 }
 .skip-link {
   display: inline-block;
@@ -89,7 +90,7 @@ a[href] {
   border-radius: 0.5em;
   text-decoration: none;
   text-align: center;
-
+  background: #fff;
   /* margin: 0 auto; */
   border: 0.2em solid blue;
   /*** when we use position: absolute we want it to be contained inside its parent element. we want to add position: relative to the parent element ***/
