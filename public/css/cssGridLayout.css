@@ -1,0 +1,54 @@
+/* Google font */
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,900|Six+Caps");
+
+/* ===== Variables =====  */
+
+/* Fonts stuff */
+/* $six-caps: 'Six Caps', sans-serif;
+$merriweather: 'Merriweather', serif;
+
+$ff-base: $merriweather;
+$ff-alt: $six-caps;
+
+$fs-base: 1rem;
+$fs-h1: 3.75rem;
+$fs-h2: 2.875rem;
+$fs-h3: 2.25rem;
+$fs-xl: 6rem;
+
+// Colours
+$black: #252525;
+$yellow: #e9d20f;
+$light-gray: #c2c2c2;
+$dark-gray: #e8e8e8;
+$white: #fff;
+
+
+// ===== Mixins ===== //
+
+@mixin font-base($font-size: $fs-base, $font-weight: 300, $color: $black) {
+  font: {
+    family: $ff-base;
+    size: $font-size;
+    weight: $font-weight;
+  }
+  color: $color;
+} 
+
+@mixin font-alt($font-size: $fs-base, $color: $black) {
+  font: {
+    family: $ff-alt;
+    size: $font-size;
+  }
+  color: $color;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+}
+
+
+// ===== Styles ===== // */
+
+body {
+  @include font-base;
+  line-height: 1.6;
+}
