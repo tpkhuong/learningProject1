@@ -59,3 +59,37 @@ function checkLength(arrInput) {
     return eachValue.length == 3;
   });
 }
+
+function diagonalDifference(arrInput) {
+  var arrayMatrix = checkLength(arrInput);
+  var valueInBothCalc;
+  var firstValues;
+  var secondValues;
+  //if index is not 1, make copy of first and third value of array.
+  arrayMatrix.forEach(function (eachSubarray, currIndex, list) {
+    if (currIndex != 1) {
+      if (currIndex == 0) {
+        firstValues = [eachSubarray[0], eachSubarray[2]];
+      }
+      if (currIndex == 2) {
+        secondValues = [eachSubarray[0], eachSubarray[2]];
+      }
+    } else {
+      for (let i = 0; i < eachSubarray.length; i++) {
+        if (i == 1) valueInBothCalc = eachSubarray[i];
+      }
+    }
+  });
+  //calculation algorithm
+  var [leftFirstValue, rightFirstValue] = firstValues;
+  var [rightSecondValue, leftSecondValue] = secondValues;
+
+  var leftSide = calcTheSum([leftFirstValue, valueInBothCalc, leftSecondValue]);
+  var rightSide = calcTheSum([
+    rightFirstValue,
+    valueInBothCalc,
+    rightSecondValue,
+  ]);
+
+  return Math.abs(leftSide - rightSide);
+}
