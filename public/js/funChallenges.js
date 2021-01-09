@@ -70,6 +70,18 @@ function getFirstAndThirdValues(arrInput) {
   });
 }
 
+function getSecondValue(arrInput) {
+  var ourValue = arrInput.filter(function filterOutSecondValue(
+    eachValue,
+    currIndex,
+    list
+  ) {
+    return currIndex == 1;
+  });
+
+  return ourValue[0];
+}
+
 function diagonalDifference(arrInput) {
   var arrayMatrix = checkLength(arrInput);
   var valueInBothCalc;
@@ -85,9 +97,10 @@ function diagonalDifference(arrInput) {
         secondValues = getFirstAndThirdValues(eachSubarray);
       }
     } else {
-      for (let i = 0; i < eachSubarray.length; i++) {
-        if (i == 1) valueInBothCalc = eachSubarray[i];
-      }
+      //   for (let i = 0; i < eachSubarray.length; i++) {
+      //     if (i == 1) valueInBothCalc = eachSubarray[i];
+      //   }
+      valueInBothCalc = getSecondValue(eachSubarray);
     }
   });
   //calculation algorithm
