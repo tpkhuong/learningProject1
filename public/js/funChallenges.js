@@ -60,6 +60,16 @@ function checkLength(arrInput) {
   });
 }
 
+function getFirstAndThirdValues(arrInput) {
+  return arrInput.filter(function filterOutSecondValue(
+    eachValue,
+    currIndex,
+    list
+  ) {
+    return currIndex != 1;
+  });
+}
+
 function diagonalDifference(arrInput) {
   var arrayMatrix = checkLength(arrInput);
   var valueInBothCalc;
@@ -69,10 +79,10 @@ function diagonalDifference(arrInput) {
   arrayMatrix.forEach(function (eachSubarray, currIndex, list) {
     if (currIndex != 1) {
       if (currIndex == 0) {
-        firstValues = [eachSubarray[0], eachSubarray[2]];
+        firstValues = getFirstAndThirdValues(eachSubarray);
       }
       if (currIndex == 2) {
-        secondValues = [eachSubarray[0], eachSubarray[2]];
+        secondValues = getFirstAndThirdValues(eachSubarray);
       }
     } else {
       for (let i = 0; i < eachSubarray.length; i++) {
